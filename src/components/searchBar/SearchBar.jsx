@@ -5,10 +5,9 @@ export default function SearchBar() {
   const [pokemon, setPokemon] = useState("");
 
   const handleSearch = async (e) => {
-    await api(search).then((res) => {
-      console.log(res.data);
-      setPokemon(res.data);
-    });
+    const pokemonData = await api(search);
+    console.log(pokemonData);
+    setPokemon(pokemonData.height);
   };
   return (
     <div className="searchBar justify-center flex">
@@ -27,7 +26,6 @@ export default function SearchBar() {
       >
         Pesquisar
       </button>
-      <h1>Search= {pokemon}</h1>
     </div>
   );
 }
