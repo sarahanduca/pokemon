@@ -1,12 +1,27 @@
-import SearchBar from "../../components/searchBar/SearchBar";
+import { useState } from "react";
 import Card from "../../components/card/Card";
+import SearchBar from "../../components/searchBar/SearchBar";
 
 export default function Home() {
+  const [pokemon, setPokemon] = useState({
+    name: "",
+    img: "",
+    type: [],
+    stats: {
+      hp: "",
+      attack: "",
+      defense: "",
+      speed: "",
+    },
+    abilities: [],
+    id: "",
+  });
+
   return (
-    <div className="home text">
-      <SearchBar />
-      <Card />
-      <h1>this is home</h1>
+    <div className="home text h-full my-10 mx-20">
+      <SearchBar setPokemon={setPokemon} />
+
+      {pokemon.name ? <Card pokemon={pokemon} /> : null}
     </div>
   );
 }
