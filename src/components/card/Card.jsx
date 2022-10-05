@@ -1,3 +1,33 @@
-export default function Card() {
-  return <div className="card h-80 w-60 rounded-md bg-white"></div>;
+import typeStyle from "../typeStyle/typeStyle";
+
+export default function Card({ pokemon }) {
+  const { name, img, type, stats, abilities, id } = pokemon;
+  return (
+    <div className="card h-80 w-60 rounded-md bg-white">
+      <p>{name}</p>
+      <p>#{id}</p>
+      <div className="flex justify-around">
+        <p>❤️ {stats.hp}</p>
+        <p>⚔️ {stats.defense}</p>
+      </div>
+      <div className="flex justify-center border-4 border-gray-500 bg-gradient-to-b from-gray-400">
+        <img src={img} alt="pokemon" />
+      </div>
+
+      {type.map((type) => {
+        const bgColor = "bg-" + typeStyle(type).color;
+        return (
+          <h1 className={bgColor}>
+            {typeStyle(type).emoji} {type}
+          </h1>
+        );
+      })}
+
+      <div className="flex justify-around">
+        {abilities.map((ability) => (
+          <p>{ability}</p>
+        ))}
+      </div>
+    </div>
+  );
 }
