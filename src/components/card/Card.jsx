@@ -14,14 +14,11 @@ export default function Card({ pokemon }) {
         <img src={img} alt="pokemon" />
       </div>
 
-      {type.map((type) => {
-        const bgColor = "bg-" + typeStyle(type).color;
-        return (
-          <h1 className={bgColor}>
-            {typeStyle(type).emoji} {type}
-          </h1>
-        );
-      })}
+      {type.map((type) => (
+        <h1 className={typeStyle(type).color}>
+          {typeStyle(type).emoji} {type}
+        </h1>
+      ))}
 
       <div className="flex justify-around">
         {abilities.map((ability) => (
