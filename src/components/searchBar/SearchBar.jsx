@@ -3,7 +3,7 @@ import { get } from "../../api/api";
 
 const handleSearch = async (currPokemon, setPokemon) => {
   const pokemonData = await get(currPokemon.toLowerCase());
-  setPokemon({
+  const pokemonInfo = {
     name: pokemonData.name,
     img: pokemonData.sprites.front_default,
     type: pokemonData.types.map((type) => type.type.name),
@@ -15,7 +15,9 @@ const handleSearch = async (currPokemon, setPokemon) => {
     },
     abilities: pokemonData.abilities.map((ability) => ability.ability.name),
     id: pokemonData.id,
-  });
+  };
+  setPokemon(pokemonInfo);
+  return pokemonInfo;
 };
 
 function SearchBar(props) {

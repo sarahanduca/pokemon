@@ -5,12 +5,12 @@ import { handleSearch } from "../../components/searchBar/SearchBar";
 
 export default function ShowAllPokemons(props) {
   const { pokemon, setPokemon } = props;
-  const [pokemonList, setPokemonList] = useState([]);
   const [paginationUrl, setPaginationUrl] = useState({
     curr: "",
     next: "?offset=20&limit=20",
     prev: "",
   });
+  const pokemonList = [];
 
   const handlePagination = (prev, curr, next) => {
     setPaginationUrl({
@@ -24,23 +24,18 @@ export default function ShowAllPokemons(props) {
     pokemonList.length = 0;
     const allPokemonsData = await get(currPage);
     const { results } = allPokemonsData;
-    setPokemonList(() => {
-      return results.map((pokemon) => handleSearch(pokemon.name, setPokemon));
+    results.forEach(async (pokemon) => {
+      const currPokemon = await handleSearch(pokemon.name, setPokemon);
+      pokemonList.push(currPokemon);
     });
-    // results.forEach((currPokemon) => {
-    //   handleSearch(currPokemon.name, setPokemon);
-    //   setPokemonList((pokemonList) => [...pokemonList, pokemon]);
-    // });
-
     handlePagination(allPokemonsData.previous, currPage, allPokemonsData.next);
   };
 
   const showCardList = () => {
-    return pokemonList.map((currPokemon) => {
-      return <Card pokemon={currPokemon} />;
-    });
+    for (let i = 0; i < 20; i++) {
+      return <Card pokemon={pokemon} />;
+    }
   };
-  console.log(pokemonList);
   return (
     <div>
       <button
@@ -50,7 +45,7 @@ export default function ShowAllPokemons(props) {
         pokemons
       </button>
 
-      {pokemonList.length > 0 ? showCardList() : null}
+      {showCardList()}
 
       <button
         className="bg-blue-400 border-1 p-1 mt-2 mr-6 text-white"
