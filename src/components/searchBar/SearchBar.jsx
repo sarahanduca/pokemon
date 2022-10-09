@@ -1,26 +1,27 @@
 import { useState } from "react";
-import api from "../../api/api";
+import { get } from "../../api/api";
 
-export default function SearchBar(props) {
+const handleSearch = async (currPokemon, setPokemon) => {
+  const pokemonData = await get(currPokemon.toLowerCase());
+  setPokemon({
+    name: pokemonData.name,
+    img: pokemonData.sprites.front_default,
+    type: pokemonData.types.map((type) => type.type.name),
+    stats: {
+      hp: pokemonData.stats[0].base_stat,
+      attack: pokemonData.stats[1].base_stat,
+      defense: pokemonData.stats[2].base_stat,
+      speed: pokemonData.stats[5].base_stat,
+    },
+    abilities: pokemonData.abilities.map((ability) => ability.ability.name),
+    id: pokemonData.id,
+  });
+};
+
+function SearchBar(props) {
   const [search, setSearch] = useState("");
   const { setPokemon } = props;
 
-  const handleSearch = async (e) => {
-    const pokemonData = await api(search.toLowerCase());
-    setPokemon({
-      name: pokemonData.name,
-      img: pokemonData.sprites.front_default,
-      type: pokemonData.types.map((type) => type.type.name),
-      stats: {
-        hp: pokemonData.stats[0].base_stat,
-        attack: pokemonData.stats[1].base_stat,
-        defense: pokemonData.stats[2].base_stat,
-        speed: pokemonData.stats[5].base_stat,
-      },
-      abilities: pokemonData.abilities.map((ability) => ability.ability.name),
-      id: pokemonData.id,
-    });
-  };
   return (
     <div className="searchBar justify-center flex">
       <input
@@ -34,10 +35,12 @@ export default function SearchBar(props) {
       <button
         type="button"
         className="bg-neutral-200 hover:bg-yellow-400 border border-neutral-300 rounded-md focus:outline-none focus:border-neutral-500 focus:ring-neutral-900 focus:ring-1 py-1 px-3 h-1/2 mt-8"
-        onClick={handleSearch}
+        onClick={() => handleSearch(search, setPokemon)}
       >
         Pesquisar
       </button>
     </div>
   );
 }
+
+export { SearchBar, handleSearch };
