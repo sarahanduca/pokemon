@@ -1,5 +1,6 @@
-export default async function get(query) {
-  const pokeApiUrl = "https://pokeapi.co/api/v2/pokemon";
+const pokeApiUrl = "https://pokeapi.co/api/v2/pokemon";
+
+async function get(query) {
   try {
     const response = await fetch(`${pokeApiUrl}/${query}`);
     return await response.json();
@@ -7,3 +8,5 @@ export default async function get(query) {
     console.log(err);
   }
 }
+
+export { get };
