@@ -10,7 +10,7 @@ export default function ShowAllPokemons(props) {
     next: "?offset=20&limit=20",
     prev: "",
   });
-  const pokemonList = [];
+  const [pokemonList, setPokemonList] = useState([pokemon]);
 
   const handlePagination = (prev, curr, next) => {
     setPaginationUrl({
@@ -26,15 +26,10 @@ export default function ShowAllPokemons(props) {
     const { results } = allPokemonsData;
     results.forEach(async (pokemon) => {
       const currPokemon = await handleSearch(pokemon.name, setPokemon);
-      pokemonList.push(currPokemon);
+      setPokemonList((pokemonList)=>[...pokemonList, currPokemon]);
     });
     handlePagination(allPokemonsData.previous, currPage, allPokemonsData.next);
-  };
-
-  const showCardList = () => {
-    for (let i = 0; i < 20; i++) {
-      return <Card pokemon={pokemon} />;
-    }
+    console.log(pokemonList)
   };
   return (
     <div>
@@ -45,7 +40,14 @@ export default function ShowAllPokemons(props) {
         pokemons
       </button>
 
-      {showCardList()}
+      <div className="grid grid-cols-4 gap-8">
+        {pokemonList.length > 0 ? pokemonList.map((listPokemon) =>{
+          return (<div className="flex justify-center">
+            <Card pokemon={listPokemon}/>
+          </div>)
+        }
+          ) : null}
+      </div>
 
       <button
         className="bg-blue-400 border-1 p-1 mt-2 mr-6 text-white"
