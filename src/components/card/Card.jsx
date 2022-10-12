@@ -4,9 +4,11 @@ export default function Card({ pokemon }) {
   const { name, img, type, stats, abilities, id } = pokemon;
   const cardBg = "bg-card-bg";
   return (
-    <div className="card h-80 w-60 rounded-lg bg-white p-6 pt-3 shadow-lg">
-      <p>{name}</p>
-      <p>#{id}</p>
+    <div className="card h-72 w-60 rounded-lg bg-white p-6 pt-3 shadow-lg">
+      <div className="flex justify-between mb-2">
+        <p className="text-lg">{name}</p>
+        <p>#{id}</p>
+      </div>
       <div className="flex justify-between">
         <p>❤️ {stats.hp}</p>
         <p>⚔️ {stats.defense}</p>

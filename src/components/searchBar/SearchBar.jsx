@@ -3,6 +3,7 @@ import { get } from "../../api/api";
 
 const handleSearch = async (currPokemon, setPokemon) => {
   const pokemonData = await get(currPokemon.toLowerCase());
+  console.log(pokemonData)
   const pokemonInfo = {
     name: pokemonData.name,
     img: pokemonData.sprites.front_default,

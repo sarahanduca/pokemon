@@ -12,3 +12,4 @@ TODO
 - [ ] fundo definido pelo tipo de pokemon
 - [ ] modal com mais informações
 - [ ] botão clicavel redirecionando pra evolução do pokemon
+- [ ] route display pokemons
