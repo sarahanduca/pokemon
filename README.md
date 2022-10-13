@@ -13,3 +13,6 @@ TODO
 - [ ] modal com mais informações
 - [ ] botão clicavel redirecionando pra evolução do pokemon
 - [ ] route display pokemons
+- [ ] adicionar paginação númerica 
+- [ ] adicionar cores ao thema (talvez desfazer função typeStyle)
+- [ ] adicionar seleção de filtro abaixo da search bar
