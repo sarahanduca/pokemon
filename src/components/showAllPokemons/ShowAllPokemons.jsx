@@ -52,10 +52,9 @@ export default function ShowAllPokemons(props) {
 
       <div className="buttons flex justify-between mx-6 mt-4">
         <Button
-          hidden={paginationUrl.prev == "" ? true : false}
+          invisible={paginationUrl.prev == "" ? true : false}
           text="previous"
           colorBg="bg-yellow-400"
-          colorShadow="shadow-yellow-400/40"
           onClick={() => handleShowPokemons(paginationUrl.prev)}
         />
 
