@@ -23,16 +23,17 @@ export default function SearchTags() {
   ];
 
   return (
-    <div className="searchTags flex justify-center cursor-pointer overflow-auto object-fill w-3/4">
+    <div className="searchTag cursor-pointer my-10 flex justify-center">
       {pokemonTypes.map((type) => {
         return (
-          <div
-            className={`rounded-xl h-fit w-fit mr-2 text-tiny py-2 px-2 ${
+          <span
+            className={`rounded-xl h-fit w-fit m-2 text-tiny py-2 px-2 text-nowrap ${
               typeStyle(type.typeName).color
             }`}
           >
-            {type.emoji}{type.typeName}
-          </div>
+            {type.emoji}
+            {type.typeName}
+          </span>
         );
       })}
     </div>

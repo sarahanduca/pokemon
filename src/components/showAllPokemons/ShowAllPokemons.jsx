@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { get } from "../../api/api";
-import Card from "../../components/card/Card";
+
 import { handleSearch } from "../../components/searchBar/SearchBar";
+import Card from "../../components/card/Card";
 import Button from "../simpleButton/SimpleButton";
 
 export default function ShowAllPokemons(props) {
@@ -9,7 +10,7 @@ export default function ShowAllPokemons(props) {
   const [pokemonList, setPokemonList] = useState([]);
   const [paginationUrl, setPaginationUrl] = useState({
     curr: "",
-    next: "?offset=20&limit=20",
+    next: "offset=10",
     prev: "",
   });
 
@@ -27,7 +28,9 @@ export default function ShowAllPokemons(props) {
 
   const handleShowPokemons = async (currPage) => {
     pokemonList.length = 0;
+
     const allPokemonsData = await get(currPage);
+    console.log(allPokemonsData);
     const { results } = allPokemonsData;
     results.forEach(async (pokemon) => {
       const currPokemon = await handleSearch(pokemon.name, setPokemon);
@@ -38,11 +41,11 @@ export default function ShowAllPokemons(props) {
 
   return (
     <div className="displayPokemons">
-      <div className="pokemonCards grid grid-cols-4 gap-8">
+      <div className="pokemonCards flex flex-wrap gap-8">
         {pokemonList.length > 0
           ? pokemonList.map((listPokemon) => {
               return (
-                <div className="flex justify-center">
+                <div className="flex justify-center grow">
                   <Card pokemon={listPokemon} />
                 </div>
               );
@@ -52,7 +55,7 @@ export default function ShowAllPokemons(props) {
 
       <div className="buttons flex justify-between mx-6 mt-4">
         <Button
-          invisible={paginationUrl.prev == "" ? true : false}
+          invisible={paginationUrl.prev === "" ? true : false}
           text="previous"
           colorBg="bg-yellow-400"
           onClick={() => handleShowPokemons(paginationUrl.prev)}

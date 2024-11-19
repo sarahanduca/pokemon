@@ -20,7 +20,7 @@ export default function Home() {
   });
 
   return (
-    <div className="home text h-full my-10 mx-20">
+    <div className="home text h-full my-10 mx-20 flex justify-center flex-col">
       <SearchBar setPokemon={setPokemon} />
       <SearchTags />
       <ShowAllPokemons setPokemon={setPokemon} pokemon={pokemon} />
