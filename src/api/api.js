@@ -1,6 +1,6 @@
 const pokeApiUrl = "https://pokeapi.co/api/v2/pokemon";
 
-async function get(query) {
+async function getPokemons(query = "") {
   try {
     const response = await fetch(`${pokeApiUrl}/${query}`);
     return await response.json();
@@ -9,4 +9,4 @@ async function get(query) {
   }
 }
 
-export { get };
+export { getPokemons };

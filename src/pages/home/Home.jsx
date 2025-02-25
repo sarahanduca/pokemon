@@ -1,31 +1,17 @@
-import { useState } from "react";
-import Card from "../../components/card/Card";
-import { SearchBar } from "../../components/searchBar/SearchBar";
+// import { SearchBar } from "../../components/searchBar/SearchBar";
 import ShowAllPokemons from "../../components/showAllPokemons/ShowAllPokemons";
 import SearchTags from "../../components/searchTags/SearchTags";
+import { useContext } from "react";
+import { PokemonsContext } from "../../contexts/PokemonsContext.jsx";
 
 export default function Home() {
-  const [pokemon, setPokemon] = useState({
-    name: "",
-    img: "",
-    type: [],
-    stats: {
-      hp: "",
-      attack: "",
-      defense: "",
-      speed: "",
-    },
-    abilities: [],
-    id: "",
-  });
+  const { pokemons, setPokemons } = useContext(PokemonsContext);
 
   return (
     <div className="home text h-full my-10 mx-20 flex justify-center flex-col">
-      <SearchBar setPokemon={setPokemon} />
+      {/* <SearchBar setPokemon={setPokemon} /> */}
       <SearchTags />
-      <ShowAllPokemons setPokemon={setPokemon} pokemon={pokemon} />
-
-      {/* {pokemon.name ? <Card pokemon={pokemon} /> : null} */}
+      <ShowAllPokemons pokemons={pokemons} setPokemons={setPokemons} />
     </div>
   );
 }

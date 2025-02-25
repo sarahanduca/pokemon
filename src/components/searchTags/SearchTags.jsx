@@ -27,6 +27,7 @@ export default function SearchTags() {
       {pokemonTypes.map((type) => {
         return (
           <span
+            key={type.type}
             className={`rounded-xl h-fit w-fit m-2 text-tiny py-2 px-2 text-nowrap ${
               typeStyle(type.typeName).color
             }`}

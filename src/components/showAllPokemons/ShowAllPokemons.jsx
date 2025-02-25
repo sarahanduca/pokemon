@@ -1,51 +1,53 @@
 import { useState, useEffect } from "react";
-import { get } from "../../api/api";
+import { getPokemons } from "../../api/api";
+import { mapPokemons } from "../../utils/mapPokemons";
 
-import { handleSearch } from "../../components/searchBar/SearchBar";
 import Card from "../../components/card/Card";
 import Button from "../simpleButton/SimpleButton";
 
-export default function ShowAllPokemons(props) {
-  const { setPokemon } = props;
-  const [pokemonList, setPokemonList] = useState([]);
+export default function ShowAllPokemons({ pokemons, setPokemons }) {
   const [paginationUrl, setPaginationUrl] = useState({
-    curr: "",
-    next: "offset=10",
+    next: "offset=20",
     prev: "",
   });
 
-  useEffect(() => {
-    handleShowPokemons("");
-  }, []);
-
-  const handlePagination = (prev, curr, next) => {
+  const handlePagination = (prev, next) => {
     setPaginationUrl({
       prev: prev ? prev.split("/")[6] : "",
-      curr: curr,
       next: next.split("/")[6],
     });
   };
 
-  const handleShowPokemons = async (currPage) => {
-    pokemonList.length = 0;
+  const handleShowPokemons = async (paginationQuerry = "") => {
+    pokemons.length = 0;
 
-    const allPokemonsData = await get(currPage);
-    console.log(allPokemonsData);
-    const { results } = allPokemonsData;
-    results.forEach(async (pokemon) => {
-      const currPokemon = await handleSearch(pokemon.name, setPokemon);
-      setPokemonList((pokemonList) => [...pokemonList, currPokemon]);
-    });
-    handlePagination(allPokemonsData.previous, currPage, allPokemonsData.next);
+    const allPokemonsData = await getPokemons(paginationQuerry);
+
+    if (allPokemonsData && allPokemonsData?.results.length > 0) {
+      const pokemonsMapped = await mapPokemons(allPokemonsData.results);
+
+      setPokemons(pokemonsMapped);
+
+      handlePagination(allPokemonsData?.previous, allPokemonsData?.next);
+    }
   };
 
+  useEffect(() => {
+    handleShowPokemons();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="displayPokemons">
+    <div className="displayPokemons max-w-7xl m-auto">
       <div className="pokemonCards flex flex-wrap gap-8">
-        {pokemonList.length > 0
-          ? pokemonList.map((listPokemon) => {
+        {pokemons.length > 0
+          ? pokemons.map((listPokemon) => {
               return (
-                <div className="flex justify-center grow">
+                <div
+                  className="flex justify-center grow"
+                  key={listPokemon.name}
+                >
                   <Card pokemon={listPokemon} />
                 </div>
               );
@@ -55,7 +57,7 @@ export default function ShowAllPokemons(props) {
 
       <div className="buttons flex justify-between mx-6 mt-4">
         <Button
-          invisible={paginationUrl.prev === "" ? true : false}
+          invisible={paginationUrl.prev === ""}
           text="previous"
           colorBg="bg-yellow-400"
           onClick={() => handleShowPokemons(paginationUrl.prev)}

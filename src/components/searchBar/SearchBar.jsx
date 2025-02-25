@@ -1,24 +1,5 @@
 import { useState } from "react";
-import { get } from "../../api/api";
-
-const handleSearch = async (currPokemon, setPokemon) => {
-  const pokemonData = await get(currPokemon.toLowerCase());
-  const pokemonInfo = {
-    name: pokemonData.name,
-    img: pokemonData.sprites.front_default,
-    type: pokemonData.types.map((type) => type.type.name),
-    stats: {
-      hp: pokemonData.stats[0].base_stat,
-      attack: pokemonData.stats[1].base_stat,
-      defense: pokemonData.stats[2].base_stat,
-      speed: pokemonData.stats[5].base_stat,
-    },
-    abilities: pokemonData.abilities.map((ability) => ability.ability.name),
-    id: pokemonData.id,
-  };
-  setPokemon(pokemonInfo);
-  return pokemonInfo;
-};
+import { handleSearch } from "../../utils/handleSearch";
 
 function SearchBar(props) {
   const [search, setSearch] = useState("");
@@ -45,4 +26,4 @@ function SearchBar(props) {
   );
 }
 
-export { SearchBar, handleSearch };
+export { SearchBar };
