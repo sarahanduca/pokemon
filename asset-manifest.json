@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pokemon/react-gh-pages/static/css/main.96f86e65.css",
+    "main.js": "/pokemon/react-gh-pages/static/js/main.cccff42a.js",
+    "index.html": "/pokemon/react-gh-pages/index.html",
+    "main.96f86e65.css.map": "/pokemon/react-gh-pages/static/css/main.96f86e65.css.map",
+    "main.cccff42a.js.map": "/pokemon/react-gh-pages/static/js/main.cccff42a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.96f86e65.css",
+    "static/js/main.cccff42a.js"
+  ]
+}
