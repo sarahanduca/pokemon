@@ -11,7 +11,7 @@
 - [ ] fundo definido pelo tipo de pokemon
 - [ ] modal com mais informações
 - [ ] adicionar paginação númerica
-- [ ] adicionar seleção de filtro abaixo da search bar
+- [x] adicionar seleção de filtro abaixo da search bar
 
 #### Refact 🧶
 
@@ -26,7 +26,9 @@
 - [x] card com informações da api
 - [ ] ferramenta de pesquisa
 - [ ] botão clicavel redirecionando pra evolução do pokemon
+- [ ] deixar seleção de filtro abaixo da search bar funcional
 
 ### Bug 🚨
 
 - [ ] diagnosticar e resolver (acredito que seja o caso de uma otimização na requisição (ou na vdd um bug fix pq foi feita muito porcamente na primeira vez)) problema de requisições multiplas, trazendo resultados duplicados e fora de ordem (bagunça total)
+- [ ] icones de tipo de pokemon quebrando
