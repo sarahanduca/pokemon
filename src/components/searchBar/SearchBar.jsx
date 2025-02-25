@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { handleSearch } from "../../utils/handleSearch";
+import { getPokemons } from "../../api/api";
+import { mapPokemon } from "../../utils/mapPokemons";
 
-function SearchBar(props) {
+function SearchBar({ setPokemons }) {
   const [search, setSearch] = useState("");
-  const { setPokemon } = props;
+
+  const handleSearch = async (search) => {
+    const allPokemonsData = await getPokemons(search);
+
+    if (allPokemonsData) {
+      const pokemonsMapped = mapPokemon(allPokemonsData);
+      setPokemons([pokemonsMapped]);
+    }
+  };
 
   return (
     <div className="searchBar justify-center flex">
@@ -18,7 +27,10 @@ function SearchBar(props) {
       <button
         type="button"
         className="bg-yellow-400 hover:bg-yellow-500 ease-in duration-200 border-2 border-neutral-800 rounded-md focus:outline-none focus:border-neutral-500 focus:ring-neutral-900 focus:ring-1 py-1 px-3 h-inherit"
-        onClick={() => handleSearch(search, setPokemon)}
+        onClick={() => {
+          handleSearch(search);
+          setSearch("");
+        }}
       >
         Pesquisar
       </button>
