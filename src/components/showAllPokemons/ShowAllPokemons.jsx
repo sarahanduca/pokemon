@@ -10,6 +10,7 @@ export default function ShowAllPokemons({ pokemons, setPokemons }) {
     next: "offset=20",
     prev: "",
   });
+  const [hasNextPage, setHasNextPage] = useState(false);
 
   const handlePagination = (prev, next) => {
     setPaginationUrl({
@@ -24,8 +25,9 @@ export default function ShowAllPokemons({ pokemons, setPokemons }) {
     const allPokemonsData = await getPokemons(paginationQuerry);
 
     if (allPokemonsData && allPokemonsData?.results.length > 0) {
-      const pokemonsMapped = await mapPokemons(allPokemonsData.results);
+      setHasNextPage(!!allPokemonsData.next);
 
+      const pokemonsMapped = await mapPokemons(allPokemonsData.results);
       setPokemons(pokemonsMapped);
 
       handlePagination(allPokemonsData?.previous, allPokemonsData?.next);
@@ -39,7 +41,7 @@ export default function ShowAllPokemons({ pokemons, setPokemons }) {
   }, []);
 
   return (
-    <div className="displayPokemons max-w-7xl m-auto">
+    <div className="displayPokemons">
       <div className="pokemonCards flex flex-wrap gap-8">
         {pokemons.length > 0
           ? pokemons.map((listPokemon) => {
@@ -63,10 +65,12 @@ export default function ShowAllPokemons({ pokemons, setPokemons }) {
           onClick={() => handleShowPokemons(paginationUrl.prev)}
         />
 
-        <Button
-          text="next"
-          onClick={() => handleShowPokemons(paginationUrl.next)}
-        />
+        {hasNextPage && (
+          <Button
+            text="next"
+            onClick={() => handleShowPokemons(paginationUrl.next)}
+          />
+        )}
       </div>
     </div>
   );
