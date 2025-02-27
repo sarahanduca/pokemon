@@ -2,10 +2,10 @@ import { useState } from "react";
 import typeStyle from "../typeStyle/typeStyle";
 
 export default function SearchTags({ handleTypeFilter }) {
-  const [selectedType, setSelectedType] = useState("none");
+  const [selectedType, setSelectedType] = useState("all");
 
   const pokemonTypes = [
-    { typeName: "none", emoji: "🧼" },
+    { typeName: "all", emoji: "🧼" },
     { typeName: "bug", emoji: "🐛" },
     { typeName: "dark", emoji: "⚫" },
     { typeName: "dragon", emoji: "🐉" },

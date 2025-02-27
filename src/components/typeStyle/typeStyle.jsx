@@ -5,7 +5,7 @@ function setTypeAtributes(attributes) {
 
 export default function typeStyle(type) {
   const typeStyle = {
-    none: setTypeAtributes(["bg-white", ""]),
+    all: setTypeAtributes(["bg-white", ""]),
     bug: setTypeAtributes(["bg-bug", "🐛"]),
     dark: setTypeAtributes(["bg-dark", "⚫"]),
     dragon: setTypeAtributes(["bg-dragon", "🐉"]),
