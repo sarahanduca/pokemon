@@ -2,11 +2,12 @@ import { useState } from "react";
 import { getPokemons } from "../../api/api";
 import { mapPokemon } from "../../utils/mapPokemons";
 
-function SearchBar({ setPokemons }) {
+function SearchBar({ setPokemons = () => {}, setPaginationUrl = () => {} }) {
   const [search, setSearch] = useState("");
 
   const handleSearch = async (search) => {
     const allPokemonsData = await getPokemons(search);
+    setPaginationUrl({ next: "", prev: "" });
 
     if (allPokemonsData) {
       const pokemonsMapped = mapPokemon(allPokemonsData);
@@ -18,11 +19,17 @@ function SearchBar({ setPokemons }) {
     <div className="searchBar justify-center flex">
       <input
         class="mr-4 placeholder:italic max-w-sm placeholder:text-slate-400 block bg-white w-1/2 h-fit border border-neutral-300 rounded-md py-2 pl-4 focus:outline-none focus:border-neutral-500 focus:ring-neutral-900 focus:ring-1 sm:text-sm"
-        placeholder="Digite um pokemon..."
+        placeholder="ditto"
         type="text"
         name="search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSearch(search);
+            setSearch("");
+          }
+        }}
       />
       <button
         type="button"
@@ -32,7 +39,7 @@ function SearchBar({ setPokemons }) {
           setSearch("");
         }}
       >
-        Pesquisar
+        Search
       </button>
     </div>
   );
