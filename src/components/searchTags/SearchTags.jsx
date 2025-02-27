@@ -1,6 +1,9 @@
+import { useState } from "react";
 import typeStyle from "../typeStyle/typeStyle";
 
 export default function SearchTags({ handleTypeFilter }) {
+  const [selectedType, setSelectedType] = useState("none");
+
   const pokemonTypes = [
     { typeName: "none", emoji: "🧼" },
     { typeName: "bug", emoji: "🐛" },
@@ -25,7 +28,7 @@ export default function SearchTags({ handleTypeFilter }) {
 
   return (
     <div
-      className="searchTag cursor-pointer my-10 mx-auto w-full overflow-x-scroll h-12 whitespace-nowrap"
+      className="searchTag cursor-pointer mt-10 mx-auto w-full overflow-x-scroll h-12 whitespace-nowrap"
       style={{ scrollbarWidth: "thin" }}
     >
       {pokemonTypes.map((type) => {
@@ -33,8 +36,11 @@ export default function SearchTags({ handleTypeFilter }) {
           <span
             className={`rounded-xl h-fit w-fit m-2 text-tiny py-2 px-2 text-nowrap ${
               typeStyle(type.typeName).color
-            }`}
-            onClick={() => handleTypeFilter(type.typeName)}
+            } ${type.typeName === selectedType ? "opacity-100" : "opacity-50"}`}
+            onClick={() => {
+              handleTypeFilter(type.typeName);
+              setSelectedType(type.typeName);
+            }}
           >
             {type.emoji}
             {type.typeName}

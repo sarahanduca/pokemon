@@ -4,10 +4,10 @@ import Home from "../home/Home";
 
 export default function Main() {
   return (
-    <div className="relative main bg-gray-200 h-full">
-      <TopBall/>
+    <div className="relative main h-full min-h-screen">
+      <TopBall />
       <Home />
-      <BottomBall/>
+      <BottomBall />
     </div>
   );
 }

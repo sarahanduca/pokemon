@@ -7,16 +7,17 @@
 #### Design 🎨
 
 - [x] design do card
-- [ ] componentes da bola fixed na página
-- [ ] componente de bola do tamanho da tela atual
-- [ ] fundo definido pelo tipo de pokemon
+- [x] componentes da bola fixed na página
+- [x] componente de bola do tamanho da tela atual
+- [ ] fundo definido pelo tipo de pokemon 🚩
 - [ ] modal com mais informações
-- [ ] sobressair o filtro que está sendo utilizado dentre as opções
+- [x] sobressair o filtro que está sendo utilizado dentre as opções
 - [x] adicionar seleção de filtro abaixo da search bar
 
 #### Refact 🧶
 
 - [x] refatorar estado do resultado de pesquisa para um contexto pra ser atualizado em todas as pesquisas
+- [x] pesquisar quando enter é precionado
 
 #### Feature 🆕
 
@@ -25,6 +26,9 @@
 - [x] card com informações da api
 - [x] ferramenta de pesquisa
 - [x] deixar seleção de filtro abaixo da search bar funcional
+- [ ] loading screen
+- [ ] 404 screen
+- [ ] tratamento de erro (tela(?))
 
 ### Bug 🚨
 
@@ -33,3 +37,4 @@
 - [x] filtro de tipos de pokemon precisa de responsividade
 - [ ] overflow de conteúdo do card
       ![alt text](image.png)
+- [ ] espaçamento da tela/display do(s) card(s) quando tem apenas um pokemon ou quando não teme extamente a quantidade necessaria para preencher uma linha 🚩

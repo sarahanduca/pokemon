@@ -19,9 +19,15 @@ export const PokemonsProvider = ({ children }) => {
       id: "",
     },
   ]);
+  const [paginationUrl, setPaginationUrl] = useState({
+    next: "offset=20",
+    prev: "",
+  });
 
   return (
-    <PokemonsContext.Provider value={{ pokemons, setPokemons }}>
+    <PokemonsContext.Provider
+      value={{ pokemons, setPokemons, paginationUrl, setPaginationUrl }}
+    >
       {children}
     </PokemonsContext.Provider>
   );

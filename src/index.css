@@ -8,6 +8,7 @@ body {
   font-family: "Roboto Mono", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(229 231 235);
 }
 
 code {
