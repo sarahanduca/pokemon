@@ -4,7 +4,7 @@ import Home from "../home/Home";
 
 export default function Main() {
   return (
-    <div className="relative main h-full min-h-screen">
+    <div className="main h-fit">
       <TopBall />
       <Home />
       <BottomBall />
